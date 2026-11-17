@@ -1,0 +1,4 @@
+{
+  "compilerOptions": { "composite": true, "noEmit": true, "skipLibCheck": true, "target": "ES2022", "lib": ["ES2022"], "module": "ESNext", "moduleResolution": "Bundler", "types": ["node"], "strict": true, "noUnusedLocals": true, "noUnusedParameters": true },
+  "include": ["vite.config.ts", "vitest.config.ts", "netlify/**/*.ts"]
+}

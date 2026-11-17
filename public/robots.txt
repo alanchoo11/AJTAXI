@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /AJTAXI/
+Sitemap: https://alanchoo11.github.io/AJTAXI/sitemap.xml
