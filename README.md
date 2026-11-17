@@ -17,7 +17,7 @@ No partnership, company history, fleet size, verified pricing, guaranteed earnin
 
 ## Local development
 
-Requirements: Node.js 20.19 or newer and pnpm 11+ (or npm).
+Requirements: Node.js 20.19 or newer and pnpm 10.26+ (or npm).
 
 ```sh
 pnpm install
