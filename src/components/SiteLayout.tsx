@@ -1,38 +1,45 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Menu, Phone, X } from 'lucide-react';
 import { useLocale } from '../i18n';
-import { WhatsAppLink } from './WhatsAppLink';
 import { setPageMeta } from '../lib/seo';
 import { assetUrl } from '../lib/assets';
+import { AJLOGIST_PHONE, AJLOGIST_PHONE_TEL } from '../lib/contact';
 
 const nav = [
-  { to:'/', key:'home' as const }, { to:'/vehicles', key:'vehicles' as const }, { to:'/owners', key:'owners' as const },
-  { to:'/about', key:'about' as const }, { to:'/faq', key:'faq' as const }, { to:'/contacts', key:'contacts' as const },
+  { to:'/vehicles', key:'vehicles' as const }, { to:'/owners', key:'owners' as const }, { to:'/contacts', key:'contacts' as const },
 ];
 
 export function SiteLayout() {
   const { t } = useLocale();
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const sectionByRoute: Record<string, string> = {
+      '/': 'top', '/vehicles': 'rental', '/owners': 'owners', '/contacts': 'contacts',
+    };
+    const sectionId = sectionByRoute[pathname];
+    requestAnimationFrame(() => {
+      if (sectionId) document.getElementById(sectionId)?.scrollIntoView({ behavior: pathname === '/' ? 'auto' : 'smooth', block: 'start' });
+      else window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+  }, [pathname]);
+
   return <div className="site-shell">
     <button className="skip-link" type="button" onClick={() => document.getElementById('main')?.focus()}>{t('skipToContent')}</button>
     <header className="site-header">
       <div className="header-inner wrap">
-        <Link className="brand" to="/" aria-label={`AJLOGIST — ${t('home')}`}><img src={assetUrl('/assets/aj-logo.svg')} alt="AJLOGIST" /></Link>
+        <Link className="brand" to="/" aria-label={'AJLOGIST — ' + t('home')}><img src={assetUrl('/assets/aj-logo-dark.svg')} alt="AJLOGIST" /></Link>
         <button className="mobile-menu-button icon-button" aria-label={open ? t('closeNavigation') : t('openNavigation')} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
         <nav className={`main-nav ${open ? 'is-open' : ''}`} aria-label={t('mainNavigation')}>
           {nav.map(item => <NavLink key={item.to} to={item.to} end={item.to === '/'} onClick={() => setOpen(false)}>{t(item.key)}</NavLink>)}
-          <div className="mobile-nav-actions">
-            <LanguageSelect />
-            <Link className="button button-light" to="/vehicles" onClick={() => setOpen(false)}>{t('exploreCars')}<ArrowUpRight size={16}/></Link>
-          </div>
         </nav>
-        <div className="desktop-nav-actions"><LanguageSelect /><Link className="button button-light header-cta" to="/vehicles">{t('exploreCars')}<ArrowUpRight size={16}/></Link></div>
+        <div className="desktop-nav-actions"><LanguageSelect /><a className="button button-accent header-cta" href={'tel:' + AJLOGIST_PHONE_TEL}><Phone size={16}/><span>{t('callForDetails')}</span></a></div>
       </div>
     </header>
     <main id="main" tabIndex={-1}><Outlet /></main>
     <Footer />
-    <WhatsAppLink floating />
   </div>;
 }
 
@@ -47,11 +54,10 @@ function Footer() {
   const { t } = useLocale();
   return <footer className="site-footer">
     <div className="wrap footer-top">
-      <div className="footer-brand"><Link to="/"><img src={assetUrl('/assets/aj-logo.svg')} alt="AJLOGIST" /></Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
-      <div className="footer-links"><span className="eyebrow">AJLOGIST</span><div>{nav.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}<Link to="/privacy">{t('legal')}</Link></div></div>
-      <div className="footer-contact"><span className="eyebrow">{t('contacts')}</span><WhatsAppLink className="footer-whatsapp" message={t('contactText')}>{t('contactUs')}<ArrowUpRight size={15}/></WhatsAppLink></div>
+      <div className="footer-brand"><Link to="/"><img src={assetUrl('/assets/aj-logo-dark.svg')} alt="AJLOGIST" /></Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
+      <div className="footer-contact"><span>{t('contacts')}</span><a href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a><Link to="/contacts">{t('contactUs')}</Link></div>
     </div>
-    <div className="wrap footer-bottom"><span>{t('copyright')}</span><span>ASTANA · KZ</span></div>
+    <div className="wrap footer-bottom"><span>{t('copyright')}</span><Link to="/privacy">{t('legal')}</Link></div>
   </footer>;
 }
 

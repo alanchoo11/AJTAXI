@@ -1,7 +1,7 @@
 import { BrowserRouter, HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { LocaleProvider } from './i18n';
 import { SiteLayout } from './components/SiteLayout';
-import { AboutPage, ContactsPage, FaqPage, HomePage, OwnerPage, PrivacyPage, RentalSuccessPage, VehicleCatalogPage, VehicleDetailsPage } from './pages/PublicPages';
+import { AboutPage, ContactsPage, FaqPage, HomePage, OwnerPage, PrivacyPage, RentalSuccessPage, VehicleCatalogPage, VehicleDetailsPage } from './pages/CompanyPages';
 import { AdminPage } from './pages/AdminPage';
 
 export function App() {
