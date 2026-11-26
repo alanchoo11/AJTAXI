@@ -113,7 +113,30 @@ export function HomePage() {
 }
 
 export function OwnerPage() { return <HomePage />; }
-export function VehicleCatalogPage() { return <HomePage />; }
+export function VehicleCatalogPage() {
+  const { t, locale } = useLocale();
+  const cars = [
+    { brand: 'Geely', model: 'Emgrand', year: null },
+    { brand: 'JAC', model: 'J7', year: '2023' },
+    { brand: 'BYD', model: 'Seal 05', year: '2025' },
+    { brand: 'Hyundai', model: 'Accent', year: '2021' },
+  ];
+  useEffect(() => setPageMeta(t('catalogTitle'), t('catalogIntro')), [locale, t]);
+  return <>
+    <section className="page-top wrap"><div className="catalog-heading"><span className="eyebrow">{t('vehicles')}</span><h1>{t('catalogTitle')}</h1><p>{t('catalogIntro')}</p></div></section>
+    <section className="section wrap catalog-section" aria-label={t('catalogTitle')}>
+      <div className="catalog-list">{cars.map((car) => {
+        const name = [car.brand, car.model, car.year].filter(Boolean).join(' ');
+        return <article className="catalog-row" key={name}>
+          <div className="catalog-model"><h2>{car.brand} {car.model}</h2>{car.year && <span>{car.year}</span>}</div>
+          <WhatsAppLink className="catalog-contact" message={t('catalogMessage').replace('{model}', name)}>
+            {t('catalogAsk')}<ArrowUpRight size={17} />
+          </WhatsAppLink>
+        </article>;
+      })}</div>
+    </section>
+  </>;
+}
 export function VehicleDetailsPage() { return <Navigate to="/vehicles" replace />; }
 export function AboutPage() { return <Navigate to="/" replace />; }
 export function FaqPage() { return <Navigate to="/" replace />; }

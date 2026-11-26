@@ -17,7 +17,7 @@ export function SiteLayout() {
 
   useEffect(() => {
     const sectionByRoute: Record<string, string> = {
-      '/': 'top', '/vehicles': 'rental', '/owners': 'owners', '/contacts': 'contacts',
+      '/': 'top', '/owners': 'owners', '/contacts': 'contacts',
     };
     const sectionId = sectionByRoute[pathname];
     requestAnimationFrame(() => {
