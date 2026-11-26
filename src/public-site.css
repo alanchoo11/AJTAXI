@@ -366,3 +366,10 @@
   .faq-preview-heading { align-items: flex-start; flex-direction: column; }
   .faq-preview-heading .text-link { margin: 0; }
 }
+
+@media (max-width: 480px) {
+  .catalog-row { align-items: flex-start; flex-direction: column; gap: 8px; padding-block: 19px; }
+  .catalog-model { align-items: baseline; gap: 8px; }
+  .catalog-model h2 { font-size: clamp(1.55rem, 7vw, 1.9rem); }
+  .catalog-contact { min-height: 44px; }
+}
