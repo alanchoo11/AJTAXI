@@ -56,9 +56,9 @@ function Footer() {
     <div className="wrap footer-top">
       <div className="footer-brand"><Link className="footer-wordmark" to="/">AJLOGIST</Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
       <nav className="footer-links" aria-label={t('mainNavigation')}>
-        {nav.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
+        {nav.filter(item => item.key !== 'contacts').map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
       </nav>
-      <div className="footer-contact"><span>{t('contacts')}</span><a href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a><Link to="/contacts">{t('contactUs')}</Link></div>
+      <div className="footer-contact"><a href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a></div>
     </div>
     <div className="wrap footer-bottom"><span>{t('copyright')}</span><Link to="/privacy">{t('legal')}</Link></div>
   </footer>;

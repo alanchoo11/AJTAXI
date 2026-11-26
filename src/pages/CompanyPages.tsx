@@ -35,7 +35,6 @@ export function HomePage() {
   return <div className="company-page">
     <section className="company-hero wrap" id="top">
       <div className="company-hero-copy">
-        <p className="city-line">{t('city')}</p>
         <h1>{t('heroTitle')}</h1>
         <p className="company-hero-lede">{t('heroText')}</p>
         <div className="company-hero-actions">
