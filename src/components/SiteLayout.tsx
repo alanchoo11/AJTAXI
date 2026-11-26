@@ -58,7 +58,7 @@ function Footer() {
       <nav className="footer-links" aria-label={t('mainNavigation')}>
         {nav.filter(item => item.key !== 'contacts').map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
       </nav>
-      <div className="footer-contact"><a href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a></div>
+      <div className="footer-contact"><span>{t('contacts')}</span><a href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a></div>
     </div>
     <div className="wrap footer-bottom"><span>{t('copyright')}</span><Link to="/privacy">{t('legal')}</Link></div>
   </footer>;
