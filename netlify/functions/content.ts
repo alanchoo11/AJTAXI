@@ -15,9 +15,8 @@ export const handler:Handler=async(event)=>{
     if(type==='settings') {
       const {data,error}=await db.from('site_settings').select('key,value');
       if(error) throw new Error('database_query_failed');
-      const allowed=new Set(['whatsapp_number','phone','address','working_hours','calculator_commission','calculator_daily_gross','calculator_working_days','calculator_daily_fuel','calculator_daily_other','calculator_monthly_rental','default_language']);
+      const allowed=new Set(['default_language']);
       const settings=Object.fromEntries((data||[]).filter(x=>allowed.has(x.key)).map(x=>[x.key,x.value]));
-      if(!settings.whatsapp_number&&process.env.WHATSAPP_NUMBER) settings.whatsapp_number=process.env.WHATSAPP_NUMBER;
       return reply(200,{settings});
     }
     if(type==='copy') {

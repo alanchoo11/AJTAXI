@@ -1,6 +1,6 @@
 export function setPageMeta(title:string,description?:string) {
-  const fullTitle=`${title} · AJ TAXI PARK`;
-  const summary=(description||`${title}. AJ Taxi Park — driver onboarding and vehicle rental in Astana.`).slice(0,300);
+  const fullTitle=`${title} · AJLOGIST`;
+  const summary=(description||`${title}. AJLOGIST — автомобильная аренда в Астане.`).slice(0,300);
   document.title=fullTitle;
   setMeta('name','description',summary);
   setMeta('property','og:title',fullTitle);

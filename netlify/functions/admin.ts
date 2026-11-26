@@ -134,13 +134,11 @@ export const handler:Handler=async(event)=>{
 
     if(action==='save_settings') {
       const settings=asRecord(body.settings);
-      const allowed=['whatsapp_number','phone','address','working_hours','calculator_commission','calculator_daily_gross','calculator_working_days','calculator_daily_fuel','calculator_daily_other','calculator_monthly_rental','default_language'];
+      const allowed=['default_language'];
       const values=[];
       for(const key of allowed) if(key in settings) {
         const value=clean(settings[key],300);
         if(key==='whatsapp_number'&&value&&!/^\+?[0-9 ()-]{8,24}$/.test(value)) return reply(400,{error:'invalid_setting'});
-        if(key==='calculator_commission'&&value!==''&&(!Number.isFinite(Number(value))||Number(value)<0||Number(value)>100)) return reply(400,{error:'invalid_setting'});
-        if(key.startsWith('calculator_')&&key!=='calculator_commission'&&value!==''&&(!Number.isFinite(Number(value))||Number(value)<0||Number(value)>5_000_000)) return reply(400,{error:'invalid_setting'});
         if(key==='default_language'&&!['ru','kk','en'].includes(value)) return reply(400,{error:'invalid_setting'});
         values.push({key,value,updated_at:new Date().toISOString()});
       }

@@ -35,6 +35,7 @@ jobs:
         run: pnpm build
         env:
           VITE_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          VITE_WHATSAPP_NUMBER: 77017446622
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:

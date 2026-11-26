@@ -156,25 +156,18 @@ create policy faqs_public_read on public.faqs for select to anon,authenticated u
 drop policy if exists profiles_self_read on public.profiles;
 create policy profiles_self_read on public.profiles for select to authenticated using (id=auth.uid() or public.has_admin_role(auth.uid()));
 
-insert into public.vehicles(brand,model,description,rental_conditions,is_demo,availability_status)
-select brand,'',jsonb_build_object('kk','Моделі кейін расталады','ru','Модель будет подтверждена','en','Model to be confirmed'),jsonb_build_object('kk','Демонстрациялық жазба. Қолжетімділікті AJ-ден нақтылаңыз.','ru','Демонстрационная запись. Уточните наличие у AJ.','en','Demonstration record. Confirm availability with AJ.'),true,'on_request'
-from (values ('BYD'),('Chery'),('Haval'),('Geely'),('Changan')) as brands(brand)
-where not exists(select 1 from public.vehicles v where v.is_demo=true and v.brand=brands.brand);
-
 insert into public.faqs(category,question_kk,question_ru,question_en,answer_kk,answer_ru,answer_en,sort_order)
 select s.category,s.question_kk,s.question_ru,s.question_en,s.answer_kk,s.answer_ru,s.answer_en,s.sort_order
 from (values
-('drivers','AJ автопаркіне қалай қосылуға болады?','Как подключиться к автопарку AJ?','How do I join the AJ fleet?','Сайтта өтінім қалдырыңыз. AJ командасы хабарласып, процесс пен шарттарды түсіндіреді.','Оставьте заявку на сайте. Команда AJ свяжется с вами, расскажет о процессе и уточнит условия.','Send an application through the website. The AJ team will contact you to explain the process and terms.',1),
-('drivers','Қандай құжаттар қажет?','Какие документы понадобятся?','Which documents will I need?','Құжаттар тізімін қосылуды талқылағанда AJ командасы хабарлайды.','Список сообщит команда AJ при обсуждении подключения.','AJ will share the requirements while discussing onboarding.',2),
-('rental','Сайт арқылы көлік брондауға бола ма?','Можно ли забронировать автомобиль через сайт?','Can I reserve a vehicle on the website?','Форма сұрау жібереді, бірақ броньды растамайды. Қолжетімділік пен шарттарды AJ растауы керек.','Форма отправляет запрос, но не подтверждает бронь. Наличие и условия должен подтвердить AJ.','The form sends an enquiry but does not confirm a reservation. AJ must confirm availability and terms.',3),
-('payments','Баға мен кепілдік жарнаны қайдан көруге болады?','Где посмотреть стоимость и залог?','Where can I see prices and deposits?','Расталған прайста жоқ сомаларды AJ-ден нақтылаңыз.','Суммы, которых еще нет в подтвержденном прайсе, нужно уточнить у AJ.','Ask AJ to confirm amounts that are not in a verified price list.',4),
-('documents','Құжаттарды сайт арқылы жіберу керек пе?','Нужно ли отправлять документы через сайт?','Should I send documents through the website?','Жоқ. Бұл форма байланыс деректері мен қызметке қызығушылықты ғана жинайды. Құжаттар қажет болса, команда бөлек сұрайды.','Нет. Эта форма собирает только контактные данные и интерес к услугам. Документы команда запросит отдельно, если они понадобятся.','No. This form collects contact details and service interest only. The team will ask separately if documents are needed.',6),
-('general','Есептеу құралы табысқа кепілдік бере ме?','Гарантирует ли калькулятор доход?','Does the calculator guarantee earnings?','Жоқ. Ол енгізілген болжамдар негізіндегі есепті ғана көрсетеді.','Нет. Он показывает только результат на основе введенных предположений.','No. It only calculates based on assumptions you enter.',5)
+('rental','Көлікті қандай мақсатта жалға алуға болады?','Для чего можно арендовать автомобиль?','What can I rent a car for?','Көліктер таксиде, соның ішінде Яндекс Go қызметінде жұмыс істеу үшін жалға беріледі. Жүргізушілер такси паркіне қосылмайды.','Автомобили сдаются в аренду для работы в такси, в том числе в Яндекс Go. AJLOGIST не подключает водителей к таксопарку.','Cars are available for taxi work, including work with Yandex Go. AJLOGIST does not onboard drivers into a taxi fleet.',1),
+('owners','Көлігімді AJLOGIST-ке ұсына аламын ба?','Можно ли передать AJLOGIST свой автомобиль?','Can I offer my car to AJLOGIST?','Иә. Иелердің көліктерін кейін жалға беру үшін қабылдаймыз. Тапсыру тәртібі мен шарттарды алдын ала талқылаймыз.','Да. Мы принимаем автомобили владельцев для дальнейшей аренды. Порядок передачи и условия обсуждаем заранее.','Yes. We accept cars from owners for rental. We discuss the handover and terms in advance.',2),
+('owners','Көлік иесі қандай үлес алады?','Какую долю получает владелец автомобиля?','What share does the vehicle owner receive?','Иесінің үлесін көлікті тапсырғанға дейін жеке келісеміз.','Долю владельца согласуем индивидуально до передачи автомобиля.','We agree on the owner’s share individually before handover.',3),
+('rental','Көліктердің қолжетімділігі мен шарттарын қайдан білуге болады?','Где узнать о наличии автомобилей и условиях?','How can I ask about availability and terms?','Қоңырау шалыңыз немесе жазыңыз. Өзекті ақпаратты хабарласқанда айтамыз.','Позвоните или напишите нам. Актуальную информацию по автомобилям и условиям сообщим при обращении.','Call or message us. We will share current vehicle and rental details when you get in touch.',4)
 ) as s(category,question_kk,question_ru,question_en,answer_kk,answer_ru,answer_en,sort_order)
 where not exists(select 1 from public.faqs f where f.question_en=s.question_en);
 
 insert into public.site_settings(key,value) values
-('whatsapp_number','""'::jsonb),('phone','""'::jsonb),('address','""'::jsonb),('working_hours','""'::jsonb),('calculator_commission','"0"'::jsonb),('calculator_daily_gross','"35000"'::jsonb),('calculator_working_days','"22"'::jsonb),('calculator_daily_fuel','"4500"'::jsonb),('calculator_daily_other','"1000"'::jsonb),('calculator_monthly_rental','"0"'::jsonb),('default_language','"ru"'::jsonb)
+('whatsapp_number','"77017446622"'::jsonb),('phone','"+77017446622"'::jsonb),('default_language','"ru"'::jsonb)
 on conflict(key) do nothing;
 
 -- Vehicle image objects are public to read; only active administrators may write or delete.

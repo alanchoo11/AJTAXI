@@ -7,7 +7,7 @@ import { setPageMeta } from '../lib/seo';
 import { assetUrl } from '../lib/assets';
 
 const nav = [
-  { to:'/', key:'home' as const }, { to:'/drivers', key:'drivers' as const }, { to:'/vehicles', key:'vehicles' as const },
+  { to:'/', key:'home' as const }, { to:'/vehicles', key:'vehicles' as const }, { to:'/owners', key:'owners' as const },
   { to:'/about', key:'about' as const }, { to:'/faq', key:'faq' as const }, { to:'/contacts', key:'contacts' as const },
 ];
 
@@ -18,16 +18,16 @@ export function SiteLayout() {
     <button className="skip-link" type="button" onClick={() => document.getElementById('main')?.focus()}>{t('skipToContent')}</button>
     <header className="site-header">
       <div className="header-inner wrap">
-        <Link className="brand" to="/" aria-label={`AJ Taxi Park — ${t('home')}`}><img src={assetUrl('/assets/aj-logo.svg')} alt="AJ Taxi Park" /></Link>
+        <Link className="brand" to="/" aria-label={`AJLOGIST — ${t('home')}`}><img src={assetUrl('/assets/aj-logo.svg')} alt="AJLOGIST" /></Link>
         <button className="mobile-menu-button icon-button" aria-label={open ? t('closeNavigation') : t('openNavigation')} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
         <nav className={`main-nav ${open ? 'is-open' : ''}`} aria-label={t('mainNavigation')}>
           {nav.map(item => <NavLink key={item.to} to={item.to} end={item.to === '/'} onClick={() => setOpen(false)}>{t(item.key)}</NavLink>)}
           <div className="mobile-nav-actions">
             <LanguageSelect />
-            <Link className="button button-light" to="/drivers" onClick={() => setOpen(false)}>{t('join')}<ArrowUpRight size={16}/></Link>
+            <Link className="button button-light" to="/vehicles" onClick={() => setOpen(false)}>{t('exploreCars')}<ArrowUpRight size={16}/></Link>
           </div>
         </nav>
-        <div className="desktop-nav-actions"><LanguageSelect /><Link className="button button-light header-cta" to="/drivers">{t('join')}<ArrowUpRight size={16}/></Link></div>
+        <div className="desktop-nav-actions"><LanguageSelect /><Link className="button button-light header-cta" to="/vehicles">{t('exploreCars')}<ArrowUpRight size={16}/></Link></div>
       </div>
     </header>
     <main id="main" tabIndex={-1}><Outlet /></main>
@@ -47,8 +47,8 @@ function Footer() {
   const { t } = useLocale();
   return <footer className="site-footer">
     <div className="wrap footer-top">
-      <div className="footer-brand"><Link to="/"><img src={assetUrl('/assets/aj-logo.svg')} alt="AJ Taxi Park" /></Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
-      <div className="footer-links"><span className="eyebrow">AJ TAXI PARK</span><div>{nav.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}<Link to="/privacy">{t('legal')}</Link></div></div>
+      <div className="footer-brand"><Link to="/"><img src={assetUrl('/assets/aj-logo.svg')} alt="AJLOGIST" /></Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
+      <div className="footer-links"><span className="eyebrow">AJLOGIST</span><div>{nav.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}<Link to="/privacy">{t('legal')}</Link></div></div>
       <div className="footer-contact"><span className="eyebrow">{t('contacts')}</span><WhatsAppLink className="footer-whatsapp" message={t('contactText')}>{t('contactUs')}<ArrowUpRight size={15}/></WhatsAppLink></div>
     </div>
     <div className="wrap footer-bottom"><span>{t('copyright')}</span><span>ASTANA · KZ</span></div>

@@ -20,3 +20,27 @@ h1,h2,h3,p{margin-top:0}h1,h2,h3{color:var(--text)}h1{font-size:clamp(2.5rem,5vw
 .contact-cta{background:#17191a}.admin-filters{grid-template-columns:minmax(190px,1.5fr) repeat(3,minmax(130px,1fr))}.faq-edit-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}.faq-edit-toolbar .field{max-width:260px;flex:1}.faq-edit-toolbar>button{border:0;background:none;color:#b9bdbc;font-size:.75rem;padding:8px}.faq-edit-toolbar>button:hover{color:#fff}.vehicle-editor{max-height:90dvh}.vehicle-translation-editor{padding-top:10px;border-top:1px solid var(--line-soft)}.vehicle-translation-editor summary{cursor:pointer;color:#d0d2d0;font-size:.8rem;padding:8px 0}.translation-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;padding:14px 0;border-bottom:1px solid var(--line-soft)}.translation-fields>.eyebrow{grid-column:1/-1}.translation-fields .field textarea{font-size:.77rem}
 @media(max-width:767px){.admin-filters{grid-template-columns:1fr 1fr}.faq-edit-toolbar{align-items:stretch}.translation-fields{grid-template-columns:1fr}}
 @media(max-width:420px){.admin-filters{grid-template-columns:1fr}}
+
+/* Clear, content-led service pages. */
+.hero-scroll{text-decoration:none}
+.visual-caption{justify-content:flex-start}
+.service-row{grid-template-columns:minmax(0,1fr) minmax(150px,.55fr);gap:clamp(24px,5vw,70px);min-height:230px}
+.service-copy{grid-column:1;grid-row:1;align-self:center}
+.service-row .service-side-mark{grid-column:2;grid-row:1;justify-self:center}
+.owner-mark{font-size:clamp(3rem,7vw,6rem);font-weight:600;letter-spacing:-.08em}
+.benefits-layout,.owner-page-content{display:grid;grid-template-columns:.78fr 1.22fr;gap:clamp(36px,8vw,115px);align-items:start}
+.benefits-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.benefits-list li{padding:17px 0;border-bottom:1px solid var(--line);color:#d9dcda;font-size:.94rem}
+.owner-page-content .note-panel{margin:0}
+.owner-page-content .benefits-list{margin-top:20px}
+.contact-phone{display:inline-block;margin-top:5px;color:#fff;font-size:1.05rem;font-weight:600;letter-spacing:.02em;text-decoration:none}
+.contact-number{color:#fff;font-size:.95rem;font-weight:500;text-decoration:none}
+.detail-contact-note{margin:23px 0!important;color:#d9dcda!important}
+.vehicle-conditions{max-width:760px}
+@media(max-width:767px){
+  .service-row{grid-template-columns:minmax(0,1fr);gap:16px;min-height:0;padding:30px 0}
+  .service-copy{grid-column:1;grid-row:1}
+  .service-row>div:nth-child(2).service-side-mark{grid-column:1;grid-row:2;justify-self:start;margin-top:5px}
+  .service-car-mark{height:70px}
+  .benefits-layout,.owner-page-content{grid-template-columns:1fr;gap:20px}
+}
