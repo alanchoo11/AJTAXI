@@ -315,7 +315,7 @@
 .footer-links a:hover,
 .footer-contact a:hover,
 .footer-bottom a:hover { color: #efb58c; }
-.footer-contact > a:not(.footer-whatsapp) { font-size: 1.05rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.footer-contact > .footer-phone { color: #f4f2e9; font-size: 1.05rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 .footer-whatsapp { display: inline-flex; min-height: 44px; align-items: center; gap: 9px; padding: 0 13px; border: 1px solid #f4f2e9; border-radius: 5px; background: #f4f2e9; color: #183c33 !important; font-size: .87rem; font-weight: 600; text-decoration: none; }
 .footer-whatsapp:hover { background: #fff; color: #183c33 !important; }
 .footer-bottom { border-color: #ffffff36; }

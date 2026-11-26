@@ -9,7 +9,7 @@ import { PageHeading, SectionHeading } from '../components/SiteLayout';
 import { WhatsAppLink } from '../components/WhatsAppLink';
 import { setPageMeta } from '../lib/seo';
 import { assetUrl, publicImageUrl } from '../lib/assets';
-import { AJLOGIST_PHONE, AJLOGIST_PHONE_TEL } from '../lib/contact';
+import { AJLOGIST_PHONE } from '../lib/contact';
 
 function useVehicles() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -134,7 +134,7 @@ function ContactCta() {
   const { t } = useLocale();
   return <section className="contact-cta wrap"><div>
     <span className="eyebrow">AJLOGIST</span><h2>{t('contactTitle')}</h2><p>{t('contactText')}</p>
-    <a className="contact-phone" href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a>
+    <span className="contact-phone">{AJLOGIST_PHONE}</span>
   </div><div className="contact-cta-actions">
     <WhatsAppLink className="button button-light" message={t('contactText')}>{t('contactUs')}<ArrowUpRight size={17} /></WhatsAppLink>
     <Link className="text-link" to="/contacts">{t('contacts')}<ArrowRight size={16} /></Link>
@@ -149,7 +149,7 @@ export function VehicleCatalogPage() {
     <section className="section wrap">
       {vehicles.length ? <VehicleGrid vehicles={vehicles} /> : <div className="empty-state">
         <span className="empty-icon"><SlidersHorizontal /></span><p>{t('catalogEmpty')}</p>
-        <a className="button button-outline" href={'tel:' + AJLOGIST_PHONE_TEL}>{t('callForDetails')}</a>
+        <WhatsAppLink className="button button-outline" message={t('catalogEmpty')}>{t('callForDetails')}<ArrowUpRight size={16} /></WhatsAppLink>
       </div>}
     </section>
   </>;
@@ -175,8 +175,7 @@ export function VehicleDetailsPage() {
       <div className="detail-copy"><span className="eyebrow">{t('vehicles')}</span><h1>{vehicle.brand}<br /><span>{vehicle.model}</span></h1>
         {description && <p>{description}</p>}
         <p className="detail-contact-note">{t('callForDetails')}</p>
-        <a className="button button-light" href={'tel:' + AJLOGIST_PHONE_TEL}>{t('contactUs')}<ArrowUpRight size={16} /></a>
-        <WhatsAppLink className="text-link" message={t('contactText')}>{t('whatsapp')}<ArrowUpRight size={16} /></WhatsAppLink>
+        <WhatsAppLink className="button button-light" message={t('contactText')}>{t('contactUs')}<ArrowUpRight size={16} /></WhatsAppLink>
       </div>
     </section>
     {conditions && <section className="section section-border"><div className="wrap"><SectionHeading title={t('conditions')} /><p className="muted-copy vehicle-conditions">{conditions}</p></div></section>}
@@ -212,7 +211,7 @@ export function ContactsPage() {
   return <>
     <section className="page-top wrap"><PageHeading eyebrow={t('contacts')} title={t('contactsTitle')} text={t('contactsText')} /></section>
     <section className="section wrap contacts-layout"><div className="contact-detail-list">
-      <div className="contact-detail"><span className="eyebrow">{t('phone')}</span><a className="contact-number" href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a></div>
+      <div className="contact-detail"><span className="eyebrow">{t('phone')}</span><strong className="contact-number">{AJLOGIST_PHONE}</strong></div>
       <div className="contact-detail"><span className="eyebrow">WhatsApp</span><WhatsAppLink className="text-link">{t('contactUs')}<ArrowUpRight size={16} /></WhatsAppLink></div>
       <div className="contact-detail"><span className="eyebrow">{t('cityLabel')}</span><strong>{t('city')}</strong></div>
     </div></section>

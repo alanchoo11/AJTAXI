@@ -6,7 +6,7 @@ import { faqItems } from '../data/faq';
 import { useLocale } from '../i18n';
 import { WhatsAppLink } from '../components/WhatsAppLink';
 import { setPageMeta } from '../lib/seo';
-import { AJLOGIST_PHONE, AJLOGIST_PHONE_TEL } from '../lib/contact';
+import { AJLOGIST_PHONE } from '../lib/contact';
 
 function contactMessage(locale: Locale, topic: 'rental' | 'owner' | 'general') {
   const messages = {
@@ -128,7 +128,7 @@ function ContactBlock({ message }: { message: string }) {
         <p>{t('contactText')}</p>
       </div>
       <div className="contact-methods">
-        <a className="contact-phone" href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a>
+        <span className="contact-phone">{AJLOGIST_PHONE}</span>
         <span className="contact-city">{t('city')}</span>
         <WhatsAppLink className="button button-paper" message={message}>
           <MessageCircle size={17} /><span>{t('whatsapp')}</span><ArrowUpRight size={16} />

@@ -38,9 +38,9 @@ export const faqItems: FAQItem[] = [
       en: 'How can I check availability and rental cost?',
     },
     answer: {
-      ru: 'Позвоните или напишите в WhatsApp. Наличие автомобиля и стоимость аренды уточняются при обращении; цены на сайте не указаны.',
-      kk: 'Қоңырау шалыңыз немесе WhatsApp-қа жазыңыз. Көліктің бар-жоғын және жалдау бағасын хабарласқанда нақтылауға болады; сайтта баға көрсетілмеген.',
-      en: 'Call or message us on WhatsApp. Ask us about availability and rental cost; prices are not listed on this site.',
+      ru: 'Напишите нам в WhatsApp. Наличие автомобиля и стоимость аренды уточняются при обращении; цены на сайте не указаны.',
+      kk: 'WhatsApp-қа жазыңыз. Көліктің бар-жоғын және жалдау бағасын хабарласқанда нақтылауға болады; сайтта баға көрсетілмеген.',
+      en: 'Message us on WhatsApp to ask about availability and rental cost; prices are not listed on this site.',
     },
   },
   {
@@ -94,9 +94,9 @@ export const faqItems: FAQItem[] = [
       en: 'Can I offer my car to AJLOGIST?',
     },
     answer: {
-      ru: 'Да. Мы принимаем автомобили владельцев для дальнейшей сдачи в аренду. Напишите или позвоните, чтобы обсудить автомобиль и порядок передачи.',
-      kk: 'Иә. Көлік иелерінің автомобильдерін кейін жалға беру үшін қабылдаймыз. Көлік пен оны тапсыру тәртібін талқылау үшін жазыңыз немесе қоңырау шалыңыз.',
-      en: 'Yes. We accept cars from owners for rental. Call or message us to discuss the vehicle and handover.',
+      ru: 'Да. Мы принимаем автомобили владельцев для дальнейшей сдачи в аренду. Напишите в WhatsApp, чтобы обсудить автомобиль и порядок передачи.',
+      kk: 'Иә. Көлік иелерінің автомобильдерін кейін жалға беру үшін қабылдаймыз. Көлік пен оны тапсыру тәртібін WhatsApp-та талқылауға болады.',
+      en: 'Yes. We accept cars from owners for rental. Message us on WhatsApp to discuss the vehicle and handover.',
     },
   },
   {

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { Menu, Phone, X } from 'lucide-react';
+import { Menu, MessageCircle, X } from 'lucide-react';
 import { useLocale } from '../i18n';
 import { setPageMeta } from '../lib/seo';
 import { assetUrl } from '../lib/assets';
-import { AJLOGIST_PHONE, AJLOGIST_PHONE_TEL } from '../lib/contact';
+import { AJLOGIST_PHONE } from '../lib/contact';
 import { WhatsAppLink } from './WhatsAppLink';
 
 const nav = [
@@ -56,7 +56,7 @@ export function SiteLayout() {
         <nav id="primary-navigation" className={`main-nav ${open ? 'is-open' : ''}`} aria-label={t('mainNavigation')}>
           {nav.map(item => <NavLink key={item.to} to={item.to} end={item.to === '/'} onClick={() => setOpen(false)}>{t(item.key)}</NavLink>)}
         </nav>
-        <div className="desktop-nav-actions"><LanguageSelect /><a className="button button-accent header-cta" href={'tel:' + AJLOGIST_PHONE_TEL}><Phone size={16}/><span>{t('callForDetails')}</span></a></div>
+        <div className="desktop-nav-actions"><LanguageSelect /><WhatsAppLink className="button button-accent header-cta" message={t('contactText')}><MessageCircle size={16}/><span>{t('contactUs')}</span></WhatsAppLink></div>
       </div>
       {open && <button className="mobile-nav-backdrop" type="button" aria-label={t('closeNavigation')} onClick={() => setOpen(false)} />}
     </header>
@@ -86,7 +86,7 @@ function Footer() {
       <nav className="footer-links" aria-label={t('mainNavigation')}>
         {footerLinks.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
       </nav>
-      <div className="footer-contact"><a href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a><WhatsAppLink className="footer-whatsapp" /></div>
+      <div className="footer-contact"><span className="footer-phone">{AJLOGIST_PHONE}</span><WhatsAppLink className="footer-whatsapp" /></div>
     </div>
     <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} AJLOGIST · {t('city')}</span><Link to="/privacy">{t('legal')}</Link></div>
   </footer>;
