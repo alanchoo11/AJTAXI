@@ -212,10 +212,10 @@
   .contact-section-inner { grid-template-columns: 1fr; gap: 31px; padding-block: 58px; }
   .contact-copy h2 { max-width: 13ch; }
   .contact-phone { font-size: 1.8rem; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 28px 24px; padding-block: 38px 30px; }
+  .footer-top { grid-template-columns: 1fr; gap: 24px; padding-block: 38px 30px; }
   .footer-brand { grid-column: 1 / -1; }
-  .footer-links { gap: 11px; }
-  .footer-contact { padding-top: 20px; border-top: 1px solid var(--rule); }
+  .footer-links { gap: 11px; padding-top: 20px; border-top: 1px solid #ffffff2b; }
+  .footer-contact { padding-top: 0; border-top: 0; }
   .footer-bottom { align-items: flex-start; flex-direction: row; gap: 16px; }
   .privacy-page { min-height: 65vh; padding-block: 58px; }
 }
