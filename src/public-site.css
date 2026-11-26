@@ -35,7 +35,7 @@
   backdrop-filter: none;
 }
 .header-inner { gap: clamp(16px, 3vw, 42px); }
-.brand img { width: 176px; height: 40px; }
+.brand img { width: 176px; height: 40px; object-fit: contain; }
 .main-nav { gap: clamp(18px, 2.5vw, 36px); }
 .main-nav a { color: var(--muted-ink); font-size: .86rem; }
 .main-nav a:hover,
@@ -166,7 +166,8 @@
 
 .site-footer { border-top: 0; background: #183c33; color: #f4f2e9; }
 .footer-top { grid-template-columns: minmax(0, 1.2fr) minmax(150px, .7fr) minmax(210px, .8fr); gap: clamp(28px, 6vw, 84px); align-items: start; padding-block: 54px 46px; }
-.footer-wordmark { display: inline-block; color: #f4f2e9; font-size: 1.35rem; font-weight: 700; letter-spacing: .11em; text-decoration: none; }
+.footer-wordmark { display: block; width: 180px; line-height: 0; text-decoration: none; }
+.footer-wordmark img { display: block; width: 100%; height: auto; object-fit: contain; }
 .footer-brand p { margin-top: 14px; color: #c5d2cb; font-size: .86rem; line-height: 1.7; }
 .footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 13px; }
 .footer-links a { color: #e4e9e4; font-size: .9rem; text-decoration: none; }

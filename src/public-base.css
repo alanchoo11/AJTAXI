@@ -29,7 +29,7 @@ button { color: inherit; }
 .section { padding-block: var(--section-gap); }
 .site-header { position: sticky; top: 0; z-index: var(--z-nav); }
 .header-inner { position: relative; display: flex; height: 100%; align-items: center; justify-content: space-between; gap: 28px; }
-.brand img { width: 176px; height: 40px; }
+.brand img { width: 176px; height: 40px; object-fit: contain; }
 .main-nav { display: flex; align-items: center; justify-content: center; gap: clamp(16px, 2vw, 30px); margin-left: auto; }
 .main-nav a { position: relative; text-decoration: none; transition: color .18s ease; }
 .main-nav a.active::after { position: absolute; right: 0; bottom: -10px; left: 0; height: 2px; background: #a44f32; content: ''; }
