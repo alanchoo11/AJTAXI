@@ -150,12 +150,12 @@
 .site-shell .button.button-paper:hover { background: #fff; box-shadow: 0 8px 18px #10271d22; }
 
 .site-footer { border-top: 0; background: var(--paper); }
-.footer-top { grid-template-columns: 1fr auto; gap: 40px; padding-block: 36px 28px; }
+.footer-top { grid-template-columns: minmax(0, 1fr) minmax(260px, .72fr); gap: clamp(28px, 7vw, 96px); align-items: center; padding-block: 42px 36px; }
 .footer-brand img { width: 156px; height: 38px; }
 .footer-brand p { color: var(--muted-ink); font-size: .8rem; }
-.footer-contact { display: grid; grid-template-columns: auto auto; gap: 4px 20px; align-content: center; align-items: center; color: var(--muted-ink); font-size: .86rem; }
-.footer-contact span { grid-row: 1 / span 2; }
-.footer-contact a { color: var(--ink); text-decoration: none; }
+.footer-contact { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; color: var(--muted-ink); font-size: .86rem; }
+.footer-contact span { margin-bottom: 2px; color: var(--muted-ink); font-size: .76rem; }
+.footer-contact a { color: var(--ink); text-decoration: none; line-height: 1.45; }
 .footer-contact a:last-child { color: var(--forest); }
 .footer-contact a:hover,
 .footer-bottom a:hover { color: var(--rust); }
@@ -211,8 +211,7 @@
   .contact-copy h2 { max-width: 13ch; }
   .contact-phone { font-size: 1.8rem; }
   .footer-top { grid-template-columns: 1fr; gap: 25px; padding-block: 31px 24px; }
-  .footer-contact { grid-template-columns: auto 1fr; justify-content: start; padding-top: 18px; border-top: 1px solid var(--rule); }
-  .footer-contact span { grid-row: auto; }
+  .footer-contact { padding-top: 20px; border-top: 1px solid var(--rule); }
   .footer-bottom { align-items: flex-start; flex-direction: row; gap: 16px; }
   .privacy-page { min-height: 65vh; padding-block: 58px; }
 }
