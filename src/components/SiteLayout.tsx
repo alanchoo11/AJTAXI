@@ -5,6 +5,7 @@ import { useLocale } from '../i18n';
 import { setPageMeta } from '../lib/seo';
 import { assetUrl } from '../lib/assets';
 import { AJLOGIST_PHONE, AJLOGIST_PHONE_TEL } from '../lib/contact';
+import { WhatsAppLink } from './WhatsAppLink';
 
 const nav = [
   { to:'/vehicles', key:'vehicles' as const }, { to:'/owners', key:'owners' as const }, { to:'/contacts', key:'contacts' as const },
@@ -17,26 +18,47 @@ export function SiteLayout() {
 
   useEffect(() => {
     const sectionByRoute: Record<string, string> = {
-      '/': 'top', '/owners': 'owners', '/contacts': 'contacts',
+      '/': 'top', '/owners': 'owners',
     };
     const sectionId = sectionByRoute[pathname];
-    requestAnimationFrame(() => {
-      if (sectionId) document.getElementById(sectionId)?.scrollIntoView({ behavior: pathname === '/' ? 'auto' : 'smooth', block: 'start' });
-      else window.scrollTo({ top: 0, behavior: 'auto' });
+    setOpen(false);
+    const frame = requestAnimationFrame(() => {
+      const target = sectionId ? document.getElementById(sectionId) : null;
+      if (!target) {
+        window.scrollTo(0, 0);
+        return;
+      }
+      const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height ?? 76;
+      const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - headerHeight - 12);
+      window.scrollTo(0, top);
     });
+    return () => cancelAnimationFrame(frame);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
 
   return <div className="site-shell">
     <button className="skip-link" type="button" onClick={() => document.getElementById('main')?.focus()}>{t('skipToContent')}</button>
     <header className="site-header">
       <div className="header-inner wrap">
-        <Link className="brand" to="/" aria-label={'AJLOGIST — ' + t('home')}><img src={assetUrl('/assets/aj-logo-dark.svg')} alt="AJLOGIST" /></Link>
-        <button className="mobile-menu-button icon-button" aria-label={open ? t('closeNavigation') : t('openNavigation')} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
-        <nav className={`main-nav ${open ? 'is-open' : ''}`} aria-label={t('mainNavigation')}>
+        <Link className="brand" to="/" aria-label={'AJLOGIST — ' + t('home')} onClick={event => {
+          setOpen(false);
+          if (pathname === '/') { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        }}><img src={assetUrl('/assets/aj-logo-dark.svg')} alt="AJLOGIST" /></Link>
+        <button className="mobile-menu-button icon-button" aria-label={open ? t('closeNavigation') : t('openNavigation')} aria-expanded={open} aria-controls="primary-navigation" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
+        <nav id="primary-navigation" className={`main-nav ${open ? 'is-open' : ''}`} aria-label={t('mainNavigation')}>
           {nav.map(item => <NavLink key={item.to} to={item.to} end={item.to === '/'} onClick={() => setOpen(false)}>{t(item.key)}</NavLink>)}
         </nav>
         <div className="desktop-nav-actions"><LanguageSelect /><a className="button button-accent header-cta" href={'tel:' + AJLOGIST_PHONE_TEL}><Phone size={16}/><span>{t('callForDetails')}</span></a></div>
       </div>
+      {open && <button className="mobile-nav-backdrop" type="button" aria-label={t('closeNavigation')} onClick={() => setOpen(false)} />}
     </header>
     <main id="main" tabIndex={-1}><Outlet /></main>
     <Footer />
@@ -52,15 +74,21 @@ function LanguageSelect() {
 
 function Footer() {
   const { t } = useLocale();
+  const footerLinks = [
+    ...nav.filter(item => item.key !== 'contacts'),
+    { to:'/about', key:'about' as const },
+    { to:'/faq', key:'faq' as const },
+    { to:'/contacts', key:'contacts' as const },
+  ];
   return <footer className="site-footer">
     <div className="wrap footer-top">
       <div className="footer-brand"><Link className="footer-wordmark" to="/">AJLOGIST</Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
       <nav className="footer-links" aria-label={t('mainNavigation')}>
-        {nav.filter(item => item.key !== 'contacts').map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
+        {footerLinks.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
       </nav>
-      <div className="footer-contact"><span>{t('contacts')}</span><a href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a></div>
+      <div className="footer-contact"><a href={'tel:' + AJLOGIST_PHONE_TEL}>{AJLOGIST_PHONE}</a><WhatsAppLink className="footer-whatsapp" /></div>
     </div>
-    <div className="wrap footer-bottom"><span>{t('copyright')}</span><Link to="/privacy">{t('legal')}</Link></div>
+    <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} AJLOGIST · {t('city')}</span><Link to="/privacy">{t('legal')}</Link></div>
   </footer>;
 }
 

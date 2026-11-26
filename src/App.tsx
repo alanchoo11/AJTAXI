@@ -1,8 +1,10 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { LocaleProvider } from './i18n';
 import { SiteLayout } from './components/SiteLayout';
-import { AboutPage, ContactsPage, FaqPage, HomePage, OwnerPage, PrivacyPage, RentalSuccessPage, VehicleCatalogPage, VehicleDetailsPage } from './pages/CompanyPages';
-import { AdminPage } from './pages/AdminPage';
+import { AboutPage, ContactsPage, FaqPage, HomePage, NotFoundPage, OwnerPage, PrivacyPage, RentalSuccessPage, VehicleCatalogPage, VehicleDetailsPage } from './pages/CompanyPages';
+
+const AdminPage = lazy(() => import('./pages/AdminPage').then(module => ({ default: module.AdminPage })));
 
 export function App() {
   const Router = import.meta.env.BASE_URL === '/' ? BrowserRouter : HashRouter;
@@ -18,8 +20,8 @@ export function App() {
       <Route path="contacts" element={<ContactsPage/>}/>
       <Route path="privacy" element={<PrivacyPage/>}/>
       <Route path="success" element={<RentalSuccessPage/>}/>
-      <Route path="*" element={<Navigate to="/" replace/>}/>
+      <Route path="*" element={<NotFoundPage/>}/>
     </Route>
-    <Route path="/admin" element={<AdminPage/>}/>
+    <Route path="/admin" element={<Suspense fallback={<main aria-busy="true" />}><AdminPage/></Suspense>}/>
   </Routes></Router></LocaleProvider>;
 }

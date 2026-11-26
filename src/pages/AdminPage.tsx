@@ -6,6 +6,7 @@ import { useLocale } from '../i18n';
 import { adminRequest, supabaseBrowserConfig } from '../lib/api';
 import { assetUrl } from '../lib/assets';
 import type { ApplicationStatus, Vehicle, VehicleStatus } from '../types';
+import '../styles.css';
 
 type Tab = 'dashboard'|'applications'|'vehicles'|'faq'|'settings';
 type Application = { id:string; type:'driver'|'rental'; full_name:string; phone:string; status:ApplicationStatus; created_at:string; admin_notes:string|null; preferred_language?:string; owns_vehicle?:boolean; vehicle_brand?:string; vehicle_model?:string; vehicle_year?:number; additional_message?:string; vehicle_reference?:string; rental_period?:string; preferred_start_date?:string };
