@@ -59,7 +59,10 @@ export function HomePage() {
         <p>{t('rentalIntro')}</p>
       </div>
       <div className="rental-details">
-        <p className="rental-lede">{t('rentalText')}</p>
+        <div className="rental-facts-intro">
+          <h3>{t('benefitsTitle')}</h3>
+          <p>{t('benefitsIntro')}</p>
+        </div>
         <ul className="rental-facts">
           <li>{t('benefitCondition')}</li>
           <li>{t('benefitTerms')}</li>
@@ -68,10 +71,12 @@ export function HomePage() {
           <li>{t('benefitSupport')}</li>
         </ul>
       </div>
-      <p className="scope-note">{t('practicalText')}</p>
-      <WhatsAppLink className="button button-outline" message={contactMessage(locale, 'rental')}>
-        <MessageCircle size={17} /><span>{t('whatsapp')}</span><ArrowUpRight size={16} />
-      </WhatsAppLink>
+      <div className="rental-actions">
+        <p className="scope-note">{t('practicalText')}</p>
+        <WhatsAppLink className="button button-accent rental-cta" message={contactMessage(locale, 'rental')}>
+          <MessageCircle size={18} /><span>{t('rentalWhatsAppCta')}</span><ArrowUpRight size={17} />
+        </WhatsAppLink>
+      </div>
     </section>
 
     <section className="owners-section" id="owners">
