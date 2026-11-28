@@ -79,6 +79,40 @@
 .catalog-contact svg { transition: transform .18s ease; }
 .catalog-contact:hover svg { transform: translate(2px, -2px); }
 
+/* Keep copy steady while making the important reading blocks easier to scan. */
+.site-shell p { text-wrap: pretty; }
+.company-hero h1,
+.catalog-heading h1,
+.company-section-heading h2,
+.contact-copy h2 { text-wrap: balance; }
+.company-hero-lede,
+.company-section-heading p,
+.scope-note,
+.owner-terms p,
+.catalog-heading p { max-width: 62ch; line-height: 1.75; }
+.hero-path { transition: color .18s ease; }
+.hero-path:hover { padding-left: 0; }
+.text-link svg,
+.hero-path svg { flex: 0 0 auto; }
+.rental-facts { column-gap: 32px; row-gap: 12px; }
+.rental-facts li { min-width: 0; }
+.catalog-row { min-width: 0; }
+.catalog-contact { min-height: 44px; padding: 8px 12px; border-radius: 4px; background: #e8e9df; transition: color .18s ease, background-color .18s ease; }
+.catalog-contact:hover { background: #e1e4d9; }
+.company-section { background: #f7f6ef; }
+.owners-section { background: #ebece3; }
+.contact-section { border-top: 1px solid #f4f2e94a; }
+.site-shell .button.rental-cta { max-width: 100%; }
+
+@media (max-width: 767px) {
+  .company-section { padding-block: 56px; }
+  .company-section-heading { gap: 16px; margin-bottom: 28px; }
+  .rental-details { gap: 28px; }
+  .rental-actions { grid-template-columns: 1fr; gap: 18px; }
+  .site-shell .button.rental-cta { width: 100%; min-width: 0; }
+  .catalog-contact { align-self: stretch; justify-content: flex-start; }
+}
+
 .company-hero {
   min-height: 590px;
   display: grid;
