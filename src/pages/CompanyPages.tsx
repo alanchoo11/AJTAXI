@@ -8,21 +8,24 @@ import { WhatsAppLink } from '../components/WhatsAppLink';
 import { setPageMeta } from '../lib/seo';
 import { AJLOGIST_PHONE } from '../lib/contact';
 
-function contactMessage(locale: Locale, topic: 'rental' | 'owner' | 'general') {
+function contactMessage(locale: Locale, topic: 'rental' | 'owner' | 'buyout' | 'general') {
   const messages = {
     ru: {
       rental: 'Здравствуйте! Хочу уточнить наличие автомобиля и условия аренды.',
       owner: 'Здравствуйте! Хочу обсудить передачу автомобиля в аренду.',
+      buyout: 'Здравствуйте! Хочу обсудить аренду автомобиля с последующим выкупом. Подскажите, для каких автомобилей это возможно и какие условия?',
       general: 'Здравствуйте! Хочу узнать подробнее об аренде автомобилей AJLOGIST.',
     },
     kk: {
       rental: 'Сәлеметсіз бе! Көліктің қолжетімділігі мен жалдау шарттарын білгім келеді.',
       owner: 'Сәлеметсіз бе! Көлікті жалға беруге ұсыну туралы сөйлескім келеді.',
+      buyout: 'Сәлеметсіз бе! Көлікті кейін сатып алу мүмкіндігімен жалға алу туралы білгім келеді. Қай көліктерге бұл мүмкіндік бар және шарттары қандай?',
       general: 'Сәлеметсіз бе! AJLOGIST көліктерін жалға алу туралы білгім келеді.',
     },
     en: {
       rental: 'Hello! I would like to ask about vehicle availability and rental terms.',
       owner: 'Hello! I would like to discuss offering my car for rental.',
+      buyout: 'Hello! I would like to discuss renting a car with the possibility of buying it later. Which vehicles are eligible and what are the terms?',
       general: 'Hello! I would like to learn more about AJLOGIST car rental.',
     },
   };
@@ -77,6 +80,12 @@ export function HomePage() {
           <MessageCircle size={18} /><span>{t('rentalWhatsAppCta')}</span><ArrowUpRight size={17} />
         </WhatsAppLink>
       </div>
+      <aside className="buyout-callout">
+        <div><h3>{t('buyoutTitle')}</h3><p>{t('buyoutText')}</p></div>
+        <WhatsAppLink className="text-link" message={contactMessage(locale, 'buyout')}>
+          <MessageCircle size={17} /><span>{t('buyoutCta')}</span><ArrowUpRight size={16} />
+        </WhatsAppLink>
+      </aside>
     </section>
 
     <section className="owners-section" id="owners">

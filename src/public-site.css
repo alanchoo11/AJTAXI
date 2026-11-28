@@ -176,6 +176,10 @@
 .rental-facts li { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; color: var(--ink); font-size: .96rem; line-height: 1.5; }
 .rental-facts li::before { flex: 0 0 8px; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--rust); content: ''; }
 .rental-actions { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 28px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.buyout-callout { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 22px 36px; margin-top: 28px; padding: 24px 26px; border: 1px solid var(--rule); border-left: 4px solid var(--rust); border-radius: 8px; background: #fff; }
+.buyout-callout h3 { margin: 0 0 5px; color: var(--ink); font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; }
+.buyout-callout p { max-width: 66ch; margin: 0; color: var(--muted-ink); font-size: .91rem; line-height: 1.65; }
+.buyout-callout .text-link { flex: 0 0 auto; }
 .scope-note { max-width: 68ch; margin: 0; color: var(--muted-ink); font-size: .9rem; line-height: 1.7; }
 .site-shell .button.rental-cta { min-width: 320px; min-height: 60px; justify-content: center; gap: 12px; padding-inline: 24px; border-radius: 8px; font-size: .98rem; }
 
@@ -256,6 +260,7 @@
   .rental-details { grid-template-columns: 1fr; gap: 16px; }
   .rental-facts-intro p { max-width: 54ch; }
   .rental-actions { grid-template-columns: 1fr; gap: 20px; margin-top: 26px; padding-top: 20px; }
+  .buyout-callout { grid-template-columns: 1fr; gap: 15px; margin-top: 22px; padding: 21px 18px; }
   .site-shell .button.rental-cta { width: 100%; min-width: 0; min-height: 60px; }
   .owners-section-inner { grid-template-columns: 1fr; gap: 28px; padding-block: 58px; }
   .owners-section .company-section-heading { margin: 0; }
