@@ -74,17 +74,11 @@ function LanguageSelect() {
 
 function Footer() {
   const { t } = useLocale();
-  const footerLinks = [
-    ...nav.filter(item => item.key !== 'contacts'),
-    { to:'/about', key:'about' as const },
-    { to:'/faq', key:'faq' as const },
-    { to:'/contacts', key:'contacts' as const },
-  ];
   return <footer className="site-footer">
     <div className="wrap footer-top">
       <div className="footer-brand"><Link className="footer-wordmark" to="/" aria-label="AJLOGIST"><img src={assetUrl('/assets/ajlogist-logo-light-2026.png')} alt="" /></Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
       <nav className="footer-links" aria-label={t('mainNavigation')}>
-        {footerLinks.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
+        {nav.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
       </nav>
       <div className="footer-contact"><span className="footer-phone">{AJLOGIST_PHONE}</span><WhatsAppLink className="footer-whatsapp" /></div>
     </div>

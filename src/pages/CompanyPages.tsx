@@ -43,7 +43,6 @@ export function HomePage() {
         <p className="company-hero-lede">{t('heroText')}</p>
         <div className="company-hero-actions">
           <Link className="button button-accent" to="/vehicles">{t('exploreCars')}<ArrowUpRight size={17} /></Link>
-          <Link className="text-link hero-owner-link" to="/owners">{t('ownersCta')}<ArrowRight size={16} /></Link>
         </div>
       </div>
       <aside className="hero-path-panel" aria-label={t('twoWays')}>
@@ -147,7 +146,29 @@ function ContactBlock({ message }: { message: string }) {
   </section>;
 }
 
-export function OwnerPage() { return <HomePage />; }
+export function OwnerPage() {
+  const { t, locale } = useLocale();
+  const message = contactMessage(locale, 'owner');
+  useEffect(() => setPageMeta(t('ownersTitle'), t('ownersIntro')), [locale, t]);
+
+  return <div className="company-page">
+    <section className="owner-page-hero wrap" id="owners">
+      <div className="owner-page-heading">
+        <span className="owner-page-kicker">{t('owners')}</span>
+        <h1>{t('ownersTitle')}</h1>
+        <p>{t('ownersIntro')}</p>
+        <WhatsAppLink className="button button-accent" message={message}>
+          <MessageCircle size={18} /><span>{t('ownersCta')}</span><ArrowUpRight size={17} />
+        </WhatsAppLink>
+      </div>
+      <aside className="owner-page-terms">
+        <span>{t('owners')}</span>
+        <h2>{t('ownerShareTitle')}</h2>
+        <p>{t('ownerShareText')}</p>
+      </aside>
+    </section>
+  </div>;
+}
 
 export function VehicleCatalogPage() {
   const { t, locale } = useLocale();
@@ -168,7 +189,7 @@ export function VehicleCatalogPage() {
         return <article className="catalog-row" key={name}>
           <div className="catalog-model"><h2>{car.brand} {car.model}</h2>{car.year && <span>{car.year} {t('modelYear')}</span>}</div>
           <WhatsAppLink className="catalog-contact" message={t('catalogMessage').replace('{model}', name)}>
-            <MessageCircle size={16} /><span>WhatsApp · {t('catalogAsk')}</span><ArrowUpRight size={17} />
+            <MessageCircle size={17} /><span>{t('catalogAsk')}</span><ArrowUpRight size={17} />
           </WhatsAppLink>
         </article>;
       }) : <p className="catalog-empty">{t('catalogNoResults')}</p>}</div>
