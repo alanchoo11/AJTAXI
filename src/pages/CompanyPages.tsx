@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, ChevronDown, MessageCircle } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ChevronDown, MessageCircle, Search } from 'lucide-react';
 import type { FAQItem, Locale } from '../types';
 import { faqItems } from '../data/faq';
 import { useLocale } from '../i18n';
@@ -44,12 +44,12 @@ export function HomePage() {
         </div>
       </div>
       <aside className="hero-path-panel" aria-label={t('twoWays')}>
-        <div className="hero-path">
-          <span>{t('forDrivers')}</span><strong>{t('driverOffer')}</strong>
-        </div>
-        <div className="hero-path">
-          <span>{t('owners')}</span><strong>{t('ownerOfferShort')}</strong>
-        </div>
+        <Link className="hero-path" to="/vehicles">
+          <span>{t('forDrivers')}</span><strong>{t('driverOffer')}</strong><ArrowUpRight size={18} aria-hidden="true" />
+        </Link>
+        <Link className="hero-path" to="/owners">
+          <span>{t('owners')}</span><strong>{t('ownerOfferShort')}</strong><ArrowUpRight size={18} aria-hidden="true" />
+        </Link>
       </aside>
     </section>
 
@@ -142,17 +142,19 @@ export function OwnerPage() { return <HomePage />; }
 
 export function VehicleCatalogPage() {
   const { t, locale } = useLocale();
+  const [query, setQuery] = useState('');
   const cars = [
     { brand: 'Geely', model: 'Emgrand', year: '' },
     { brand: 'JAC', model: 'J7', year: '2023' },
     { brand: 'BYD', model: 'Seal 05', year: '2025' },
     { brand: 'Hyundai', model: 'Accent', year: '2021' },
   ];
+  const visibleCars = cars.filter(car => [car.brand, car.model, car.year].join(' ').toLocaleLowerCase(locale).includes(query.trim().toLocaleLowerCase(locale)));
   useEffect(() => setPageMeta(t('catalogTitle'), t('catalogIntro')), [locale, t]);
   return <div className="company-page">
-    <section className="page-top wrap"><div className="catalog-heading"><h1>{t('catalogTitle')}</h1><p>{t('catalogIntro')}</p></div></section>
+    <section className="page-top wrap"><div className="catalog-heading"><h1>{t('catalogTitle')}</h1><p>{t('catalogIntro')}</p><label className="catalog-search"><Search size={18} aria-hidden="true"/><span className="sr-only">{t('catalogSearch')}</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t('catalogSearch')} /></label></div></section>
     <section className="section wrap catalog-section" aria-label={t('catalogTitle')}>
-      <div className="catalog-list">{cars.map((car) => {
+      <div className="catalog-list">{visibleCars.length ? visibleCars.map((car) => {
         const name = [car.brand, car.model, car.year].filter(Boolean).join(' ');
         return <article className="catalog-row" key={name}>
           <div className="catalog-model"><h2>{car.brand} {car.model}</h2>{car.year && <span>{car.year} {t('modelYear')}</span>}</div>
@@ -160,7 +162,7 @@ export function VehicleCatalogPage() {
             <MessageCircle size={16} /><span>WhatsApp · {t('catalogAsk')}</span><ArrowUpRight size={17} />
           </WhatsAppLink>
         </article>;
-      })}</div>
+      }) : <p className="catalog-empty">{t('catalogNoResults')}</p>}</div>
     </section>
   </div>;
 }
