@@ -51,7 +51,7 @@ export function SiteLayout() {
         <Link className="brand" to="/" aria-label={'AJLOGIST — ' + t('home')} onClick={event => {
           setOpen(false);
           if (pathname === '/') { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        }}><img src={assetUrl('/assets/ajlogist-logo.png')} alt="AJLOGIST" /></Link>
+        }}><img src={assetUrl('/assets/ajlogist-logo-2026.png')} alt="AJLOGIST" /></Link>
         <button className="mobile-menu-button icon-button" aria-label={open ? t('closeNavigation') : t('openNavigation')} aria-expanded={open} aria-controls="primary-navigation" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
         <nav id="primary-navigation" className={`main-nav ${open ? 'is-open' : ''}`} aria-label={t('mainNavigation')}>
           {nav.map(item => <NavLink key={item.to} to={item.to} end={item.to === '/'} onClick={() => setOpen(false)}>{t(item.key)}</NavLink>)}
@@ -82,7 +82,7 @@ function Footer() {
   ];
   return <footer className="site-footer">
     <div className="wrap footer-top">
-      <div className="footer-brand"><Link className="footer-wordmark" to="/" aria-label="AJLOGIST"><img src={assetUrl('/assets/ajlogist-logo-light.png')} alt="" /></Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
+      <div className="footer-brand"><Link className="footer-wordmark" to="/" aria-label="AJLOGIST"><img src={assetUrl('/assets/ajlogist-logo-light-2026.png')} alt="" /></Link><p>{t('footerLine')}<br/>{t('city')}</p></div>
       <nav className="footer-links" aria-label={t('mainNavigation')}>
         {footerLinks.map(item => <Link key={item.to} to={item.to}>{t(item.key)}</Link>)}
       </nav>

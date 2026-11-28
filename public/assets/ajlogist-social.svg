@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#f5f6f8"/>
-  <image href="ajlogist-logo.png" x="62" y="110" width="440" height="277"/>
+  <image href="ajlogist-logo-2026.png" x="62" y="110" width="440" height="277"/>
   <text x="555" y="252" fill="#17263a" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">Аренда автомобилей</text>
   <text x="555" y="310" fill="#17263a" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">в Астане</text>
   <path d="M555 358h72" stroke="#e87500" stroke-width="5"/>

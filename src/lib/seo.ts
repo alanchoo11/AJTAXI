@@ -33,7 +33,7 @@ export function setPageMeta(title: string, description?: string) {
     if (!canonicalLink.isConnected) document.head.append(canonicalLink);
     setMeta('property', 'og:url', canonicalHref);
 
-    const socialImage = new URL(`${import.meta.env.BASE_URL}assets/ajlogist-social.png`, window.location.origin).toString();
+    const socialImage = new URL(`${import.meta.env.BASE_URL}assets/ajlogist-social-2026.png`, window.location.origin).toString();
     setMeta('property', 'og:image', socialImage);
     setMeta('property', 'og:image:type', 'image/png');
     setMeta('name', 'twitter:image', socialImage);
